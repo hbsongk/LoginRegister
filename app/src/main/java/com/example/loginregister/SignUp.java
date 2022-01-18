@@ -35,10 +35,18 @@ public class SignUp extends AppCompatActivity {
         textViewLogin = findViewById(R.id.loginText);
         progressBar = findViewById(R.id.progress);
 
+        textViewLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fullname, username, password, email;
+                final String fullname, username, password, email;
                 fullname = String.valueOf(textInputEditTextFullname.getText());
                 username = String.valueOf(textInputEditTextUsername.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
@@ -60,7 +68,7 @@ public class SignUp extends AppCompatActivity {
                             data[1] = username;
                             data[2] = password;
                             data[3] = email;
-                            PutData putData = new PutData("https://172.30.1.59/LoginRegister/signup.php", "POST", field, data);
+                            PutData putData = new PutData("http://172.30.1.59/LoginRegister/signup.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
